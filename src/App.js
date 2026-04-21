@@ -500,7 +500,7 @@ export default function App() {
 
     setAiLoad(false);
     setMsgs(ms => { const u=[...ms]; u[u.length-1]={ type:'ai', text:response }; return u; });
-    const extracted = response.match(/"([^"]{25,})"/)? .[1];
+    const extracted = (response.match(/"([^"]{25,})"/) || [])[1];
     if (extracted) {
       setMsgs(ms => [...ms, { type:'act', text:'→ Utiliser ce texte comme brief', action:() => { setPrompt(extracted); toast_('✅ Texte inséré !'); } }]);
     }
